@@ -1,5 +1,5 @@
 import {
-  put, takeEvery, delay, fork, take
+  call, put, takeEvery, delay, fork, take
 } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { firebaseContacts } from './firestore';
@@ -10,6 +10,7 @@ import {
   POST_CONTACT_SUCCESS,
   UPDATE_STORE
 } from './actions/types';
+import { postContactApi} from './actions/contact';
 import { contactPostFailed } from './actions/actionCreator';
 
 export function* fetchContactSaga() {
@@ -18,9 +19,8 @@ export function* fetchContactSaga() {
 
 export function* postContactSaga(action) {
   try {
-      // yield put(POST_CONTACT);
-      yield firebaseContacts.push(action.payload);
-      yield delay(2000);
+      yield call(postContactApi, action.payload);
+      yield call(delay, 2000);
       yield put({ type: POST_CONTACT_SUCCESS });
   } catch (error) {
       yield put(contactPostFailed(error));
