@@ -35,6 +35,12 @@ const ContactTable = () => {
                 dataIndex="hobbies"
                 key="hobbies"
             />
+            />
+            <Column
+                title="User Id"
+                dataIndex="key"
+                key="key"
+            />
         </Table>
     );
 };
