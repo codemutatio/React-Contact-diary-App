@@ -5,9 +5,9 @@ import { Table } from 'antd';
 const { Column, ColumnGroup } = Table;
 
 const ContactTable = () => {
-    const contact = useSelector(state => state);
+    const contact = useSelector(state => state.contacts);
     return (
-        <Table dataSource={contact}>
+        <Table dataSource={Object.values(contact)}>
             <ColumnGroup title="Name">
                 <Column
                     title="First Name"

@@ -4,7 +4,7 @@ import {
     Button, Input, DatePicker, Form, InputNumber
 } from 'antd';
 
-import shortid from 'shortid';
+import { postContact } from './actions/actionCreator';
 
 const  ContactForm = props => {
     const dispatch = useDispatch();
@@ -16,16 +16,12 @@ const  ContactForm = props => {
                 return;
             }
 
-            const value = {
+            const contact = {
                 ...fieldsValue,
                 birthday: fieldsValue.birthday.format('DD-MM-YYYY'),
-                key: shortid.generate(),
             };
-
-            dispatch({
-                type: 'ADD_CONTACT',
-                value,
-            });
+            
+            dispatch(postContact(contact));
             form.resetFields();
         });
     };
